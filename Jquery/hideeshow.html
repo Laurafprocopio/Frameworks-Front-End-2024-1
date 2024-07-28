@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>primeiro teste</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#hide").click(function(){
+                $("p").hide();
+            });
+            $("#show").click(function(){
+                $("p").show();
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    
+   <p>if you click on the "Hide" button, i will disappear</p>
+
+   <button id="hide">hide</button>
+   <button id="show">show</button>
+
+
+</body>
+</html>
