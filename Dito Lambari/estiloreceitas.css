@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.pedido-item {
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    flex: 1 1 45%; /* Flex item width; adjusts to 45% to fit 2 items per row */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.pedido-item img {
+    max-width: 150px;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.pedido-info {
+    flex: 1;
+}
+
+.pedido-info h3 {
+    margin: 0;
+    color: #033449;
+}
+
+.pedido-info p {
+    color: #555;
+}
+
+.btn-add {
+    background-color: #e3946b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+    background-color: #c77a55;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #347194;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Alinha os itens em linha */
+    gap: 20px; /* Espaçamento entre os itens */
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #295c8f;
+    border-radius: 3px;
+}
+
+/* Jumbotron */
+.jumbotron {
+    position: relative;
+    background-image: url('https://img.freepik.com/fotos-gratis/prato-de-tigela-de-buda-com-legumes-e-legumes-vista-do-topo_1150-42589.jpg?t=st=1722741024~exp=1722744624~hmac=dd40a1879393365e92fe6cc8da7091f3631a4253817fa3fa728b148e2cdc0ed6&w=740');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    text-align: center;
+    padding: 100px 20px;
+    overflow: hidden;
+    height: 150px; /* Ajuste a altura conforme necessário */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.jumbotron::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(1, 36, 71, 0.6); /* Azul escuro com 60% de opacidade */
+    z-index: 0;
+}
+
+.jumbotron > * {
+    position: relative;
+    z-index: 1;
+}
+
+.jumbotron h1 {
+    font-size: 4rem;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.jumbotron p {
+    font-size: 1.25rem;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #033449;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    
+   
+    width: 100%;
+}
