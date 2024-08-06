@@ -1,32 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=">
-    <title>Dito Lambari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dito Lambari - Restaurante Cuiabano</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
-<body class="home">
-    <header class="topo">
-        <hgroup>
-            <h1><a href="/">Site do Dito Lambari</a></h1>
-            <h2>Site destinado a divulgar o trabalho de Dito Lambari</h2>
-        </hgroup>
-        <nav>
-            <ul>
-                <li><a class="corrente" href="Index.html">Home</a></li>
-                <li><a  href="sobre.html">Sobre</a></li>
-                <li><a  href="receitas.html">Receitas</a></li>
-                <li><a  href="contato.html">Contato</a></li>
 
-            </ul>
-        </nav>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a class="navbar-brand" href="#">Dito Lambari</a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="Index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link" href="receitas.html">Receitas</a></li>
+            <li class="nav-item"><a class="nav-link" href="pedidos.html">Pedidos</a></li>
+            <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Section -->
+    <header id="home" class="jumbotron">
+        <div class="container">
+            <h1>Bem-vindo ao Dito Lambari</h1>
+            <p>Experimente o melhor da culinária cuiabana!</p>
+        </div>
     </header>
 
-    <!--mais conteudo-->
-    <footer class="rodape">
-        <!--conteudo do rodape do site-->
-    </footer>
+    <!-- Sobre Nós -->
+    <section id="sobre" class="container">
+        <div class="row">
+            <div class="column">
+                <h2>Bem-vindo ao Dito Lambari – O Sabor Autêntico da Culinária Cuiabana</h2>
+                <p>No coração de Cuiabá, o Dito Lambari se destaca como um verdadeiro templo da culinária cuiabana, oferecendo uma experiência gastronômica única e autêntica. Nosso restaurante é mais do que um simples local para refeições; é um espaço onde tradição e sabor se encontram, celebrando as ricas e variadas influências da cozinha regional.</p>
+                <p>Dito Lambari é o resultado da paixão e dedicação à arte culinária local, com um menu que reflete a essência dos pratos típicos que são a alma da gastronomia cuiabana. Cada prato é preparado com ingredientes frescos e selecionados, respeitando receitas tradicionais que foram passadas de geração em geração.</p>
+                <a href="#" class="btn btn-success">Saiba mais</a>
+            </div>
+            <div class="column">
+                <img src="https://img.freepik.com/fotos-gratis/chef-cozinhando-na-cozinha-vestindo-roupas-profissionais_23-2151208316.jpg?w=1060&t=st=1722729234~exp=1722729834~hmac=e983d8de72ce6fc0713db4073e3e2f8b9c1ea5d96e4c0dc969a20cab8728b4ba" alt="Sobre Nós" width="670px" height="670px">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Receitas -->
+    <section id="receitas" class="container">
+        <div class="row receitas-texto">
+            <div class="col-md-6">
+                <h2>Receitas</h2>
+                <p>Aqui estão algumas das nossas deliciosas receitas cuiabanas. Explore os pratos típicos e descubra os sabores autênticos da culinária local!</p>
+            </div>
+            <div class="col-md-6 receitas-cards">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://s2-g1.glbimg.com/T2WHw26WyI-_MorFBMSQytO1uLo=/0x0:1600x1067/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/z/p/EBk75eRVWcwBKJBvFvjw/foto-materia-4-arroz-maria-isabel-divulgacao.jpg" alt="Nome do Prato 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Maria Izabel</h5>
+                                <p class="card-text">Descubra a receita de Maria isabel prato tipico da minha cidade (Cuiabá) para fazer em 30 minutos.</p>
+                                <a href="#" class="btn btn-success">Saiba mais</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://cdn0.tudoreceitas.com/pt/posts/9/9/9/costelinha_de_pacu_frita_8999_600.webp" alt="Nome do Prato 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Ventrecha de Pacu</h5>
+                                <p class="card-text">Vamos aprender? Continue aqui no TudoReceitas para saber como fazer costelinha de pacu frita passo a passo em fotos!</p>
+                                <a href="#" class="btn btn-success">Saiba mais</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://educadados.com.br/wordpress/wp-content/files/educadados.com.br/2023/11/artigo-78-768x512.jpg" alt="Nome do Prato 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Farofa de banana-da-terra</h5>
+                                <p class="card-text">É uma ótima opção para acompanhar pratos de carne, peixe, frango ou feijoada. Quer aprender? Então, vamos começar!</p>
+                                <a href="#" class="btn btn-success">Saiba mais</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://blog.biglar.com.br/wp-content/uploads/2023/10/iStock-825005450.jpg" alt="Nome do Prato 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Caldo de piranha</h5>
+                                <p class="card-text">Descubra a receita de Caldo de piranha super fácil para fazer em 90 minutos.</p>
+                                <a href="#" class="btn btn-success">Saiba mais</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Adicione mais cards conforme necessário -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pedidos -->
+    <section id="pedidos" class="container">
+        <h2>Faça Seu Pedido</h2>
+        <div class="pedido-container">
+            <div class="pedido-item">
+                <img src="https://s2-g1.glbimg.com/T2WHw26WyI-_MorFBMSQytO1uLo=/0x0:1600x1067/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/z/p/EBk75eRVWcwBKJBvFvjw/foto-materia-4-arroz-maria-isabel-divulgacao.jpg" alt="Nome do Prato 1">
+                <div class="pedido-info">
+                    <h3>Maria Izabel</h3>
+                    <p>Prato: Maria Izabel
+                        <br>Quantidade: 2 porções
+                        <br>Observações: (Aqui você pode incluir quaisquer observações especiais ou preferências, como a forma de preparo ou acompanhamentos adicionais)</p>
+                    <a href="pedidos.html" class="btn btn-success">Comprar</a>
+                </div>
+            </div>
+            <div class="pedido-item">
+                <img src="https://cdn0.tudoreceitas.com/pt/posts/9/9/9/costelinha_de_pacu_frita_8999_600.webp" alt="Nome do Prato 2">
+                <div class="pedido-info">
+                    <h3>Ventrecha de Pacu</h3>
+                    <p>Prato: Ventrecha de Pacu
+                        <br> Quantidade: 2 porções
+                        <br> Observações: (Inclua aqui quaisquer observações especiais ou preferências, como o nível de fritura ou acompanhamentos desejados)</p>
+                    <a href="pedidos.html" class="btn btn-success">Comprar</a>
+                </div>
+            </div>
+            <!-- Adicione mais itens conforme necessário -->
+        </div>
+    </section>
     
+    <!-- Contato -->
+    <section id="contato" class="container">
+        <h2>Contato</h2>
+        <form>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Seu e-mail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" rows="4" placeholder="Sua mensagem"></textarea>
+            </div>
+            <button type="submit" class="btn">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Dito Lambari. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
