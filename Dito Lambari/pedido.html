@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dito Lambari</title>
+
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"/>
+
+    <!-- Links para fontes e Bootstrap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/styles/style.css"> <!-- Certifique-se de que este arquivo esteja no mesmo diretório que o HTML -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let cart = [];
+
+            // Abrir o modal do carrinho
+            $('#cart-btn').on('click', function() {
+                updateCartModal();
+                $('#cart-modal').fadeIn();
+            });
+
+            // Fechar o modal quando clicar fora
+            $('#cart-modal').on('click', function(event) {
+                if ($(event.target).is('#cart-modal')) {
+                    $('#cart-modal').fadeOut();
+                }
+            });
+
+            // Fechar o modal
+            $('#close-cart-modal').on('click', function() {
+                $('#cart-modal').fadeOut();
+            });
+
+            // Adicionar ao carrinho
+            $('#pedidos').on('click', '.add-to-cart-btn', function() {
+                const name = $(this).data('name');
+                const price = parseFloat($(this).data('price'));
+                addToCart(name, price);
+            });
+
+            // Função para adicionar no carrinho
+            function addToCart(name, price) {
+                const existingItem = cart.find(item => item.name === name);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        name,
+                        price,
+                        quantity: 1,
+                    });
+                }
+
+                updateCartModal();
+            }
+
+            // Atualiza o carrinho
+            function updateCartModal() {
+                $('#cart-items').empty();
+                let total = 0;
+
+                cart.forEach(item => {
+                    const cartItemHtml = `
+                        <div class="flex items-center justify-between mb-4 flex-col">
+                            <div>
+                                <p class="font-medium">${item.name}</p>
+                                <p>Qtd: ${item.quantity}</p>
+                                <p class="font-medium mt-2">R$ ${item.price.toFixed(2)}</p>
+                            </div>
+                            <button class="remove-from-cart-btn" data-name="${item.name}">
+                                Remover
+                            </button>
+                        </div>
+                    `;
+
+                    total += item.price * item.quantity;
+                    $('#cart-items').append(cartItemHtml);
+                });
+
+                $('#cart-total').text(total.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                }));
+
+                $('#cart-count').text(cart.length);
+            }
+
+            // Remover produto do carrinho
+            $('#cart-items').on('click', '.remove-from-cart-btn', function() {
+                const name = $(this).data('name');
+                removeItemCart(name);
+            });
+
+            function removeItemCart(name) {
+                const index = cart.findIndex(item => item.name === name);
+
+                if (index !== -1) {
+                    const item = cart[index];
+
+                    if (item.quantity > 1) {
+                        item.quantity -= 1;
+                    } else {
+                        cart.splice(index, 1);
+                    }
+                    updateCartModal();
+                }
+            }
+
+            // Checkout
+            $('#checkout-btn').on('click', function() {
+                const isOpen = checkRestaurantOpen();
+                if (!isOpen) {
+                    Toastify({
+                        text: "Ops, o restaurante está fechado!",
+                        duration: 3000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                        style: {
+                            background: "#ef4444",
+                        },
+                    }).showToast();
+                    return;
+                }
+
+                if (cart.length === 0) return;
+
+                const address = $('#address').val();
+                if (address === "") {
+                    const addressWarn = $('<div class="text-red-500 mt-2">Por favor, preencha o endereço!</div>');
+                    $('#address').addClass('border-red-500');
+                    if ($('#address').next('.text-red-500').length === 0) {
+                        $('#address').after(addressWarn);
+                    }
+                    return;
+                }
+
+                // Enviar o pedido para API do WhatsApp
+                const cartItems = cart.map((item) => {
+                    return `${item.name} Quantidade: (${item.quantity}) Preço R$${item.price.toFixed(2)} |`;
+                }).join("");
+
+                const message = encodeURIComponent(cartItems);
+                const phone = "65981087471";
+
+                window.open(`https://wa.me/${phone}?text=${message} Endereço: ${address}`, "_blank");
+
+                cart = [];
+                updateCartModal();
+            });
+
+            // Verifica se o restaurante está aberto
+            function checkRestaurantOpen() {
+                const date = new Date();
+                const hora = date.getHours();
+                return hora >= 18 && hora < 22;
+            }
+
+            const isOpen = checkRestaurantOpen();
+            $('#date-span').toggleClass('bg-green-600', isOpen).toggleClass('bg-red-500', !isOpen);
+        });
+    </script>
+</head>
+<body>
+    <!-- Início do header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-blue-400 fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Dito Lambari</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sobre.html">Sobre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="receitas.html">Receitas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pedido.html">Pedido</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contato.html">Contato</a>
+                        </li>
+                    </ul>
+                </div>
+                <button id="cart-btn" class="btn btn-outline-light position-relative">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center flex flex-col items-center justify-center text-center p-5">
+            <h1 class="text-4xl mt-4 mb-2 font-bold text-white">Faça Seu Pedido</h1>
+            <h2 class="text-white font-medium">
+                Escolha seus pratos favoritos e faça seu pedido com facilidade!
+            </h2>
+            <div class="bg-blue-500 px-4 py-1 rounded-lg mt-3">
+                <span class="text-white font-medium" id="date-span">Seg a Dom - 18:00 as 22:00</span>
+            </div>
+        </div>
+    </header>
+    <!-- Fim do header -->
+
+    <!-- Início da seção de pedidos -->
+      <!-- Início da seção de pedidos -->
+      <section id="pedidos" class="my-5">
+        <div class="container">
+            <div class="row" id="menu">
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/assets/File-de-tilapia-frito.png" class="card-img-top" alt="Tilápia Frita">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold">Tilápia Frita</h5>
+                            <p class="card-text">Deliciosa tilápia frita, acompanhada de arroz e farofa.</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <p class="font-bold text-lg">R$ 30.90</p>
+                                <button class="bg-green-600 px-5 rounded add-to-cart-btn"
+                                data-name="Tilápia Frita"
+                                data-price="30.90">
+                                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/assets/caldo_de_piranha.jpg" class="card-img-top" alt="Tilápia Frita">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold">Caldo de Piranha</h5>
+                            <p class="card-text">Saboroso caldo de piranha com especiarias.</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <p class="font-bold text-lg">R$ 19.90</p>
+                                <button class="bg-green-600 px-5 rounded add-to-cart-btn"
+                                data-name="Caldo de Piranha"
+                                data-price="19.90">
+                                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/assets/file_tilapia.jpg" class="card-img-top" alt="Tilápia Frita">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold">Tilápia Grelhada</h5>
+                            <p class="card-text">Tilápia grelhada, servida com molho especial.</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <p class="font-bold text-lg">R$ 42.90</p>
+                                <button class="bg-green-600 px-5 rounded add-to-cart-btn"
+                                data-name="Tilápia Grelhada"
+                                data-price="42.90">
+                                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/assets/ventrecha.jpg" class="card-img-top" alt="Tilápia Frita">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold">Ventrecha de Pacu</h5>
+                            <p class="card-text">Deliciosa ventrecha de pacu assada, acompanhada de arroz.</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <p class="font-bold text-lg">R$ 52.90</p>
+                                <button class="bg-green-600 px-5 rounded add-to-cart-btn"
+                                data-name="Ventrecha de Pacu"
+                                data-price="52.90">
+                                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/assets/transferir.jpeg" class="card-img-top" alt="Tilápia Frita">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold">Pacu Assado Na brasa</h5>
+                            <p class="card-text">Pacu assado na brasa, com temperos especiais.</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <p class="font-bold text-lg">R$ 92.90</p>
+                                <button class="bg-green-600 px-5 rounded add-to-cart-btn"
+                                data-name="Pacu Assado Na brasa"
+                                data-price="92.90">
+                                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/assets/mujica.jpg" class="card-img-top" alt="Tilápia Frita">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold">Mujica de Pintado</h5>
+                            <p class="card-text">Saborosa mujica de pintado, acompanhada de arroz e farofa.</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <p class="font-bold text-lg">R$ 40.90</p>
+                                <button class="bg-green-600 px-5 rounded add-to-cart-btn"
+                                data-name="Mujica de Pintado"
+                                data-price="92.90">
+                                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione mais cards de itens aqui -->
+            </div>
+        </div>
+    </section>
+    <!-- Fim da seção de pedidos -->
+
+    <!-- Modal do Carrinho -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style="display:none;">
+        <div class="bg-white p-4 rounded-lg w-1/2">
+            <button id="close-cart-modal" class="btn btn-secondary float-end">X</button>
+            <h2 class="text-xl font-bold mb-4">Carrinho</h2>
+            <div id="cart-items" class="mb-4"></div>
+            <p class="font-medium">Total: <span id="cart-total">R$ 0,00</span></p>
+            <div class="form-group mt-4">
+                <label for="address">Endereço de Entrega:</label>
+                <input type="text" id="address" class="form-control" placeholder="Digite seu endereço">
+            </div>
+            <button id="checkout-btn" class="btn btn-success mt-4">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <footer class="bg-blue-400  text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="font-bold">Sobre Nós</h5>
+                    <p>O Dito Lambari é um restaurante dedicado à culinária cuiabana, oferecendo pratos autênticos e deliciosos no coração de Cuiabá. Venha experimentar o melhor da gastronomia local!</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="font-bold">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Sobre</a></li>
+                        <li><a href="#" class="text-white">Receitas</a></li>
+                        <li><a href="#" class="text-white">Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                        <h3 class="text-xl font-semibold ">Nosso Endereço</h3>
+                        <p class="text-white">Rua Exemplo, 123</p>
+                        <p class="text-white">Bairro Exemplo</p>
+                        <p class="text-white">Cuiabá, MT - 78000-000</p>
+                        <p class="text-white"><strong>Telefone:</strong> (65) 1234-5678</p>
+                        <p class="text-white"><strong>E-mail:</strong> contato@ditolambari.com.br</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="mb-0">&copy; 2024 Dito Lambari. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts do Bootstrap e Toastify -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-0nD6LUT8cH06wZxCwzO4FZzlc5z4W5F4f26Gf5zzbKZ42fp8VXJ60n6zXwQxML" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+</html>

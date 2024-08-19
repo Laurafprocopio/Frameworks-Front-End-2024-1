@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dito Lambari</title>
+
+    <!-- Links para fontes e Bootstrap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/styles/style.css"> <!-- Certifique-se de que este arquivo esteja no mesmo diretório que o HTML -->
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFOkFi8Eu1UtS3NztTF9+IL0xus9B8X/lmI5WMa5e7+cmQ3q49yZfz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-2tWRAHDAgjwW1t8ePz9ck4YCRwIBN2+aJTT7g/c4I1IXu+8jPq2w+j0GgFJrO0cx" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Início do header -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-blue-400  fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Dito Lambari</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sobre.html">Sobre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="receitas.html">Receitas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pedido.html">Pedido</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contato.html">Contato</a>
+                        </li>
+                    </ul>
+                </div>
+                <button id="cart-btn" class="btn btn-outline-light position-relative">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center flex flex-col items-center justify-center text-center p-5">
+            <h1 class="text-4xl mt-4 mb-2 font-bold text-white">Receitas</h1>
+            <h2 class="text-white font-medium">
+                Aqui estão algumas das nossas deliciosas receitas cuiabanas. Explore os pratos típicos e 
+                descubra os sabores autênticos da culinária local!
+            </h2>
+        </div>
+    </header>
+    <!-- Fim do header -->
+
+    <!-- Início Receitas -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Card de Receita -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <img src="/assets/caldo_de_piranha.jpg" alt="Caldo de Piranha" class="card-img-top w-100 h-48 object-cover">
+                    <div class="card-body d-flex flex-column h-50">
+                        <h5 class="card-title font-bold">Caldo de Piranha</h5>
+                        <p class="card-text flex-grow-1">Descubra a receita de Caldo de Piranha, super fácil para fazer em 90 minutos.</p>
+                        <button href="#" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#recipeModal" data-recipe="caldo_de_piranha">Saiba mais</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Receita -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <img src="/assets/File-de-tilapia-frito.png" alt="File de Tilapia Frito" class="card-img-top w-100 h-48 object-cover">
+                    <div class="card-body d-flex flex-column h-50">
+                        <h5 class="card-title font-bold">File de Tilapia Frito</h5>
+                        <p class="card-text flex-grow-1">Aprenda a fazer File de Tilapia Frito, uma receita prática e deliciosa.</p>
+                        <button href="#" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#recipeModal" data-recipe="file_de_tilapia_frito">Saiba mais</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Receita -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <img src="/assets/file_tilapia.jpg" alt="File de Tilapia" class="card-img-top w-100 h-48 object-cover">
+                    <div class="card-body d-flex flex-column h-50">
+                        <h5 class="card-title font-bold">File de Tilapia</h5>
+                        <p class="card-text flex-grow-1">Experimente o File de Tilapia, uma opção saudável e deliciosa para suas refeições.</p>
+                        <button href="#" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#recipeModal" data-recipe="file_de_tilapia">Saiba mais</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Receita -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <img src="/assets/mujica.jpg" alt="Mojica de Pintado" class="card-img-top w-100 h-48 object-cover">
+                    <div class="card-body d-flex flex-column h-50">
+                        <h5 class="card-title font-bold">Mojica de Pintado</h5>
+                        <p class="card-text flex-grow-1">Prove a Mojica de Pintado, um prato típico da culinária cuiabana.</p>
+                        <button href="#" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#recipeModal" data-recipe="mojica_de_pintado">Saiba mais</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fim Receitas -->
+
+    <!-- Modal Receita -->
+    <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden" id="recipe-modal">
+        <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] mx-auto">
+            <h2 class="text-center font-bold text-2xl mb-2">Modo de Preparo</h2>
+            <div id="recipe-content">
+                <!-- Conteúdo da receita será carregado aqui -->
+            </div>
+            <div class="text-center mt-3">
+                <a href="receitas.html" class="btn btn-success w-full">Ver mais receitas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="bg-blue-400  text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="font-bold">Sobre Nós</h5>
+                    <p>O Dito Lambari é um restaurante dedicado à culinária cuiabana, oferecendo pratos autênticos e deliciosos no coração de Cuiabá. Venha experimentar o melhor da gastronomia local!</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="font-bold">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Sobre</a></li>
+                        <li><a href="#" class="text-white">Receitas</a></li>
+                        <li><a href="#" class="text-white">Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                        <h3 class="text-xl font-semibold ">Nosso Endereço</h3>
+                        <p class="text-white">Rua Exemplo, 123</p>
+                        <p class="text-white">Bairro Exemplo</p>
+                        <p class="text-white">Cuiabá, MT - 78000-000</p>
+                        <p class="text-white"><strong>Telefone:</strong> (65) 1234-5678</p>
+                        <p class="text-white"><strong>E-mail:</strong> contato@ditolambari.com.br</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="mb-0">&copy; 2024 Dito Lambari. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scripts personalizados -->
+    <script src="script.js"></script>
+</body>
+
+</html>

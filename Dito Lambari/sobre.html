@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dito Lambari</title>
+
+    <!-- Links para fontes e Bootstrap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/styles/style.css">
+
+    <!-- Scripts do Bootstrap e jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9iBbJzNsyw5aJmD6wU+4b9VNeFzjF6T5wZviE6qQjzq6FmfPOfU4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-ppL7g+GeP0h+vZ6rK+zxUXcOCw+f2ePTjcq68FhKxNC4CjDWz4zC9RAcD6ZPaUhtO" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Exemplo de efeito de hover nos cards da galeria
+            $('.gallery-img').hover(
+                function() {
+                    $(this).addClass('shadow-lg');
+                },
+                function() {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            // Exemplo de manipulação de clique para o botão "Explore Nossos Pratos"
+            $('.bg-blue-500').click(function() {
+                alert('Explore nossos pratos clicado!');
+            });
+
+            // Exemplo de modal para pedidos
+            $('#orderButton').click(function() {
+                $('#orderModal').modal('show');
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Início do header -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-blue-400 fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Dito Lambari</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sobre.html">Sobre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="receitas.html">Receitas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pedido.html">Pedido</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contato.html">Contato</a>
+                        </li>
+                    </ul>
+                </div>
+                <button id="cart-btn" class="btn btn-outline-light position-relative">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Alternativa de Texto -->
+        <div class="w-full h-[420px] bg-home bg-cover bg-center flex flex-col items-center justify-center text-center p-5">
+            <h1 class="text-4xl mt-4 mb-2 font-bold text-white">Descubra o Sabor Cuiabano</h1>
+            <h2 class="text-white font-medium">
+                No Dito Lambari, você encontra a verdadeira essência da culinária cuiabana, com pratos que homenageiam a 
+                tradição e o sabor de nossa terra. Seja bem-vindo a um espaço onde cada refeição é uma celebração da cultura local.
+            </h2>
+            <div class="bg-blue-500 px-4 py-1 rounded-lg mt-3 hover:bg-blue-700 duration-300 cursor-pointer">
+                <a href="pedido.html"><span class="text-white font-medium">Explore Nossos Pratos!</span></a>
+            </div>
+        </div>
+    </header>
+    <!-- Fim do header -->
+
+    <!-- Inicio sobre nos -->
+    <h2 class="text-2xl md:text-3xl font-bold text-center mt-5 mb-4">Sobre Nós</h2>
+
+    <section id="sobre" class="container my-5">
+        <div class="flex flex-col md:flex-row">
+            <!-- Div com o texto -->
+            <div class="md:w-1/2 flex items-center pr-4">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Bem-vindo ao Dito Lambari – O Sabor Autêntico da Culinária Cuiabana</h3>
+                    <p class="mb-2">No coração de Cuiabá, o Dito Lambari se destaca como um verdadeiro templo da culinária cuiabana,
+                        oferecendo uma experiência gastronômica única e autêntica. Nosso restaurante é mais do que um 
+                        simples local para refeições; é um espaço onde tradição e sabor se encontram, celebrando as ricas
+                        e variadas influências da cozinha regional.</p>
+                    <p class="mb-4">Dito Lambari é o resultado da paixão e dedicação à arte culinária local, com um menu que reflete 
+                        a essência dos pratos típicos que são a alma da gastronomia cuiabana. Cada prato é preparado com 
+                        ingredientes frescos e selecionados, respeitando receitas tradicionais que foram passadas de geração
+                        em geração.</p>
+                </div>
+            </div>
+            <!-- Div com a imagem -->
+            <div class="md:w-1/2">
+                <img src="/assets/bg.jpg" alt="Sobre Nós" 
+                class="w-full h-auto rounded-md hover:scale-110 hover:-rotate-2 duration-300">
+            </div>
+        </div>
+    </section>
+    <!-- Fim sobre nos -->
+
+    <!-- Início da galeria -->
+    <h2 class="text-2xl md:text-3xl font-bold text-center mt-5 mb-4">Nossa Galeria</h2>
+
+    <section id="galeria" class="container my-5">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <img src="/assets/bg.jpg" alt="Prato 1" class="img-fluid rounded shadow-lg hover:scale-105 duration-300 gallery-img">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="/assets/File-de-tilapia-frito.png" alt="Prato 2" class="img-fluid rounded shadow-lg hover:scale-105 duration-300 gallery-img">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="/assets/restaurante.jpg" alt="Prato 3" class="img-fluid rounded shadow-lg hover:scale-105 duration-300 gallery-img">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="/assets/transferir.jpeg" alt="Prato 4" class="img-fluid rounded shadow-lg hover:scale-105 duration-300 gallery-img">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="/assets/restaurante2.jpg" alt="Prato 5" class="img-fluid rounded shadow-lg hover:scale-105 duration-300 gallery-img">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="/assets/ventrecha.jpg" alt="Prato 6" class="img-fluid rounded shadow-lg hover:scale-105 duration-300 gallery-img">
+            </div>
+        </div>
+    </section>
+    <!-- Fim da galeria -->
+
+<!-- Seção de cardápio -->
+<h2 class="text-2xl md:text-3xl font-bold text-center mt-5 mb-4">Cardápio</h2>
+
+<section id="cardapio" class="container my-5">
+    <div class="row">
+        <!-- Cardápio de Pratos -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="/assets/file_tilapia.jpg" class="card-img-top" alt="Maria Izabel">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center font-bold">Maria Izabel</h5>
+                    <p class="card-text text-center">Um prato típico da culinária cuiabana, preparado com carne suína e arroz.</p>
+                    <p class="font-bold text-lg text-center mt-auto">R$ 32.90</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="/assets/caldo_de_piranha.jpg" class="card-img-top" alt="Caldo de Piranha">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center font-bold">Caldo de Piranha</h5>
+                    <p class="card-text text-center">Um prato típico da culinária cuiabana, preparado com carne suína e arroz.</p>
+                    <p class="font-bold text-lg text-center mt-auto">R$ 32.90</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="/assets/File-de-tilapia-frito.png" class="card-img-top" alt="File de Tilápia Frito">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center font-bold">File de Tilápia Frito</h5>
+                    <p class="card-text text-center">Um prato típico da culinária cuiabana, preparado com carne suína e arroz.</p>
+                    <p class="font-bold text-lg text-center mt-auto">R$ 32.90</p>
+                </div>
+            </div>
+        </div>
+        <!-- Adicione outros pratos conforme necessário -->
+    </div>
+
+    <!-- Botão Centralizado -->
+    <div class="text-center mt-1">
+        <a href="receitas.html" class="btn btn-success w-full">Ver mais nosso Cardápio</a>
+    </div>
+    </div>
+</section>
+
+
+    
+
+    <!-- Rodapé -->
+    <footer class="bg-blue-400  text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="font-bold">Sobre Nós</h5>
+                    <p>O Dito Lambari é um restaurante dedicado à culinária cuiabana, oferecendo pratos autênticos e deliciosos no coração de Cuiabá. Venha experimentar o melhor da gastronomia local!</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="font-bold">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Sobre</a></li>
+                        <li><a href="#" class="text-white">Receitas</a></li>
+                        <li><a href="#" class="text-white">Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                        <h3 class="text-xl font-semibold ">Nosso Endereço</h3>
+                        <p class="text-white">Rua Exemplo, 123</p>
+                        <p class="text-white">Bairro Exemplo</p>
+                        <p class="text-white">Cuiabá, MT - 78000-000</p>
+                        <p class="text-white"><strong>Telefone:</strong> (65) 1234-5678</p>
+                        <p class="text-white"><strong>E-mail:</strong> contato@ditolambari.com.br</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="mb-0">&copy; 2024 Dito Lambari. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
